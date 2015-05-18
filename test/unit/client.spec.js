@@ -1,8 +1,6 @@
 var proxyquire = require('proxyquire'),
   _ = require('lodash'),
-  Promise = require('bluebird'),
-  should = require('should'),
-  sinon = require('sinon');
+  should = require('should');
 
 describe('kvn:spec', function () {
   var apiConstructorMap = {
@@ -33,7 +31,7 @@ describe('kvn:spec', function () {
   }
 
   beforeEach(function () {
-    kvn = proxyquire('../../lib/kvn', {
+    kvn = proxyquire('../../lib/client', {
       './keystone': apiConstructorMap
     });
     api = kvn(settings);
@@ -69,16 +67,16 @@ describe('kvn:spec', function () {
       api2;
 
     localConstructorMap.tokens = function () {
-      throw new Error('Chi-Chang')
+      throw new Error('Chi-Chang');
     };
 
     (function () {
       api2 = proxyquire('../../lib/kvn', {
         './keystone': localConstructorMap
       })(settings);
-    }).should.throw();
 
-    /*jshint expr: true*/
-    should(api2).not.be.ok;
+      /*jshint expr: true*/
+      should(api2).not.be.ok;
+    }).should.throw();
   });
 });

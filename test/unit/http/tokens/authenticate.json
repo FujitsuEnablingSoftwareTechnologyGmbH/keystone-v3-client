@@ -1,0 +1,38 @@
+{
+    "request" : {
+        "auth": {
+            "identity": {
+                "methods" : [
+                    "password"
+                ],
+                "password": {
+                    "user": {
+                        "id"      : "4af0bfb3227b4f11900366454ef4c6f4",
+                        "password": "admin"
+                    }
+                }
+            }
+        }
+    },
+    "response": {
+        "token": {
+            "methods"   : [
+                "password"
+            ],
+            "expires_at": "2015-05-18T13:38:07.039244Z",
+            "extras"    : {},
+            "user"      : {
+                "domain": {
+                    "id"  : "default",
+                    "name": "Default"
+                },
+                "id"    : "4af0bfb3227b4f11900366454ef4c6f4",
+                "name"  : "admin"
+            },
+            "audit_ids" : [
+                "D8dH3QGoROqWikoNwcC1Ng"
+            ],
+            "issued_at" : "2015-05-18T12:38:07.039262Z"
+        }
+    }
+}
