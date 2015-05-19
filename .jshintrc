@@ -27,15 +27,16 @@
     "maxerr"   : 10,
     "scripturl": true,
     "evil"     : true,
-    "debug"  : false,
-    "unused" : [
+    "debug"    : false,
+    "unused"   : [
         "should"
     ],
-    "globals": [
+    "globals"  : [
         "describe",
         "context",
         "beforeEach",
         "afterEach",
         "it"
-    ]
+    ],
+    "mocha"    : true
 }

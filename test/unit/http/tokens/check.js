@@ -1,6 +1,7 @@
 var _ = require('lodash'),
   sinon = require('sinon'),
   should = require('should'),
+  nock = require('nock'),
   uris = require('../../../../lib/util/uris'),
   mocks = require('../../../util/mocks');
 
@@ -24,13 +25,11 @@ module.exports = function (settings) {
         }
       });
     });
-    afterEach(function () {
-      require('nock').cleanAll();
-    });
+    afterEach(nock.cleanAll);
 
     var errorCodes = [400, 401, 403, 405, 413, 503, 404];
 
-    it('should successfully check token', function () {
+    it('should successfully check token', function (done) {
       // set up
       var success = sinon.spy(),
         failure = sinon.spy();
@@ -55,10 +54,12 @@ module.exports = function (settings) {
           should(failure.called).be.eql(false);
 
           should(success.calledWith({
-            statusCode: 204
+            statusCode: 204,
+            headers   : {}
           })).be.eql(true);
 
           should(api.isDone()).be.eql(true);
+          done();
         });
 
       // not finished here
@@ -66,7 +67,7 @@ module.exports = function (settings) {
     });
 
     _.forEachRight(errorCodes, function (errorCode) {
-      it('should fail for following code ' + errorCode, function () {
+      it('should fail for following code ' + errorCode, function (done) {
         var success = sinon.spy(),
           failure = sinon.spy();
 
@@ -86,12 +87,13 @@ module.exports = function (settings) {
             should(failure.called).be.eql(true);
 
             should(failure.calledWith({
-
+              headers: {},
               statusCode: errorCode
             })).be.eql(true);
 
             should(api.isDone()).be.eql(true);
-            require('nock').cleanAll();
+            nock.cleanAll();
+            done();
           });
       });
     });

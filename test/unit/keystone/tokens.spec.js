@@ -19,7 +19,7 @@ describe('keystone:api:tokens', function () {
 
   context('functionality:check', function () {
 
-    it('with new', function () {
+    it('without new', function () {
       var instance = tokensApi();
 
       /*jshint expr: true*/
@@ -28,7 +28,7 @@ describe('keystone:api:tokens', function () {
       (instance).should.have.property('settings');
     });
 
-    it('without new', function () {
+    it('with new', function () {
       var instance = new tokensApi();
 
       /*jshint expr: true*/

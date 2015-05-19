@@ -8,7 +8,7 @@ describe('keystone:api:projects', function () {
     tokensApi = mocks.mockedKeystoneApi('projects');
   });
   context('prototype:check', function () {
-    var expectedMethods = ['add', 'all', 'one', 'update', 'delete', 'user', 'group'];
+    var expectedMethods = ['add', 'all', 'one', 'update', 'remove', 'user', 'group'];
 
     it('should provide 4 methods > ' + expectedMethods.toString(), function () {
       (tokensApi.prototype).should.have.keys(expectedMethods);
@@ -16,7 +16,7 @@ describe('keystone:api:projects', function () {
   });
 
   context('functionality:check', function () {
-    it('with new', function () {
+    it('without new', function () {
       var instance = tokensApi();
 
       /*jshint expr: true*/
@@ -25,7 +25,7 @@ describe('keystone:api:projects', function () {
       (instance).should.have.property('settings');
     });
 
-    it('without new', function () {
+    it('with new', function () {
       var instance = new tokensApi();
 
       /*jshint expr: true*/

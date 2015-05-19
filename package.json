@@ -1,39 +1,54 @@
 {
     "name"           : "keystone-v3-client",
     "description"    : "A Node.js client for the OpenStack Keystone V3 Identity service",
-    "author" : "Fujitsu Poland R&D",
+    "private"        : true,
+    "version"        : "0.0.7",
+    "keywords"       : [
+        "keystone",
+        "identity",
+        "openstack",
+        "v3",
+        "client",
+        "api"
+    ],
+    "author"         : "Fujitsu Poland R&D",
     "contributors"   : [
         "Tomasz Trębski <tomasz.trebski@ts.fujitsu.com>"
     ],
-    "version": "0.0.5",
+    "engines"        : {
+        "node": ">=0.10.37 <0.12",
+        "npm" : "~2.10.1"
+    },
     "repository"     : {
         "type": "git",
         "url" : "git@estscm1.intern.est.fujitsu.com:teammonitoring/keystone-v3-client.git"
     },
-    "main"   : "./index.js",
-    "scripts": {
-        "test": "./scripts/tests.sh"
-    },
+    "main"           : "./index.js",
     "directories"    : {
-        "lib"     : "src/lib",
-        "util"    : "src/util",
-        "keystone": "src/keystone"
+        "lib"     : "./lib",
+        "util"    : "./lib/util",
+        "keystone": "./lib/keystone"
     },
     "dependencies"   : {
-        "lodash"  : "3.8.x",
-        "debug"   : "2.2.x",
-        "bluebird": "2.9.x",
-        "restler" : "3.2.x"
+        "lodash"      : "3.9.x",
+        "debug"       : "2.2.x",
+        "bluebird"    : "2.9.x",
+        "restler"     : "3.2.x",
+        "memory-cache": "0.1.x"
     },
     "devDependencies": {
-        "jshint"    : "2.7.x",
-        "should"    : "6.0.x",
-        "sinon"     : "1.14.x",
-        "proxyquire": "1.4.x",
-        "mocha"     : "2.2.x",
-        "http-proxy": "1.11.x",
-        "nock"      : "2.0.x"
+        "jshint"              : "2.7.x",
+        "jshint-html-reporter": "0.2.x",
+        "mocha"               : "2.2.x",
+        "nock"                : "2.2.x",
+        "proxyquire"          : "1.5.x",
+        "should"              : "6.0.x",
+        "sinon"               : "1.14.x"
     },
-    "licenses"       : [
-    ]
+    "licenses"       : [],
+    "scripts"        : {
+        "test"     : "./scripts/tests.sh",
+        "lint"     : "./scripts/lint.sh",
+        "lint:html": "./scripts/lint.html.sh"
+    }
 }

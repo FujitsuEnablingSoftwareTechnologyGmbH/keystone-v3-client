@@ -1,6 +1,7 @@
 var _ = require('lodash'),
   sinon = require('sinon'),
   should = require('should'),
+  nock = require('nock'),
   uris = require('../../../../lib/util/uris'),
   mocks = require('../../../util/mocks');
 
@@ -17,13 +18,13 @@ module.exports = function (settings) {
     beforeEach(function () {
       tokensApi = require('../../../../lib/keystone').tokens(tokensApiSettings);
       api = mocks.mockedKeystoneServer({
-        url  : settings.url,
-        token: settings.url
+        url    : keystoneUrl,
+        headers: {
+          'X-Auth-Token': keystoneToken
+        }
       });
     });
-    afterEach(function () {
-      require('nock').cleanAll();
-    });
+    afterEach(nock.cleanAll);
 
     var dataFile = JSON.parse(require('fs')
         .readFileSync(__dirname + '/authenticate.json')
@@ -32,7 +33,7 @@ module.exports = function (settings) {
       responseBody = dataFile.response,
       errorCodes = [400, 401, 403, 405, 413, 503, 404];
 
-    it('should authenticate user for password authentication', function () {
+    it('should authenticate user for password authentication', function (done) {
       // set up
       var success = sinon.spy(),
         failure = sinon.spy();
@@ -56,10 +57,15 @@ module.exports = function (settings) {
 
           should(success.calledWith({
             data      : responseBody,
-            statusCode: 201
+            statusCode: 201,
+            headers   : {
+              'content-type': 'application/json'
+            }
           })).be.eql(true);
 
           should(api.isDone()).be.eql(true);
+
+          done();
         });
 
       // not finished here
@@ -67,17 +73,14 @@ module.exports = function (settings) {
     });
 
     _.forEachRight(errorCodes, function (errorCode) {
-      it('should fail for following code ' + errorCode, function () {
+      it('should fail for following code ' + errorCode, function (done) {
         var success = sinon.spy(),
           failure = sinon.spy(),
           responseBody = mocks.getResponseBodyForErrorCase(errorCode, 'Authenticate');
 
-        var tmpApi = api.post(uris.tokens, requestBody);
-        if (errorCode / 500 >= 1.0) {
-          tmpApi.replyWithError(JSON.stringify(responseBody));
-        } else {
-          tmpApi.reply(errorCode, JSON.stringify(responseBody));
-        }
+        api
+          .post(uris.tokens, requestBody)
+          .reply(errorCode, responseBody);
 
         tokensApi
           .authenticate({
@@ -91,11 +94,15 @@ module.exports = function (settings) {
 
             should(failure.calledWith({
               data      : responseBody,
-              statusCode: errorCode
+              statusCode: errorCode,
+              headers   : {
+                'content-type': 'application/json'
+              }
             })).be.eql(true);
 
             should(api.isDone()).be.eql(true);
-            require('nock').cleanAll();
+            nock.cleanAll();
+            done();
           });
       });
     });

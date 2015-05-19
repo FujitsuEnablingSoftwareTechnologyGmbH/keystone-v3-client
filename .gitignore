@@ -13,3 +13,6 @@ target
 *.log
 esvm
 .htpasswd
+
+# ignore linting result
+lint_*.*

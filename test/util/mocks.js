@@ -1,6 +1,6 @@
 var proxyquire = require('proxyquire'),
   sinon = require('sinon'),
-  mixin = require('../../lib/util/mixin');
+  utils = require('../../lib/utils');
 
 module.exports = {
   mockedKeystoneApi          : function (name) {
@@ -23,19 +23,12 @@ module.exports = {
     var nock = require('nock');
     return function (opt) {
       var headers = opt.headers || {};
-      headers = mixin({
+      headers = utils.mixin({
         'X-Auth-Token': headers.token || opt.token,
         'Content-Type': 'application/json'
       }, headers);
 
-      return nock(opt.url, {reqheaders: headers})
-        .defaultReplyHeaders({
-          'x-openstack-request-id': 'req-be3d0c18bbf44379b2b797c63c9d0e74',
-          'Keep-Alive'            : 'timeout=5, max=100',
-          'Vary'                  : 'X-Auth-Token'
-        })
-        .replyDate(new Date())
-        .replyContentLength();
+      return nock(opt.url, {reqheaders: headers});
     };
   }()),
   getResponseBodyForErrorCase: function (errorCode, contextName) {

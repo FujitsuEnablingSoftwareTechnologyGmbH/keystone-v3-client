@@ -2,7 +2,7 @@ var proxyquire = require('proxyquire'),
   _ = require('lodash'),
   should = require('should');
 
-describe('kvn:spec', function () {
+describe('client', function () {
   var apiConstructorMap = {
       tokens         : MockSubApiCtr,
       service_catalog: MockSubApiCtr,

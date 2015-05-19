@@ -1,6 +1,4 @@
-var _ = require('lodash'),
-  should = require('should'),
-  sinon = require('sinon');
+var should = require('should');
 
 describe('uris:spec', function () {
 

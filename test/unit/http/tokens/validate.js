@@ -1,6 +1,7 @@
 var _ = require('lodash'),
   sinon = require('sinon'),
   should = require('should'),
+  nock = require('nock'),
   uris = require('../../../../lib/util/uris'),
   mocks = require('../../../util/mocks');
 
@@ -25,9 +26,7 @@ module.exports = function (settings) {
         }
       });
     });
-    afterEach(function () {
-      require('nock').cleanAll();
-    });
+    afterEach(nock.cleanAll);
 
     var dataFile = JSON.parse(require('fs')
         .readFileSync(__dirname + '/validate.json')
@@ -35,7 +34,7 @@ module.exports = function (settings) {
       responseBody = dataFile.response,
       errorCodes = [400, 401, 403, 405, 413, 503, 404];
 
-    it('should validate token correctly', function () {
+    it('should validate token correctly', function (done) {
       // set up
       var success = sinon.spy(),
         failure = sinon.spy();
@@ -60,25 +59,24 @@ module.exports = function (settings) {
 
           should(success.calledWith({
             data      : responseBody,
-            statusCode: 200
+            statusCode: 200,
+            headers   : {
+              'content-type': 'application/json'
+            }
           })).be.eql(true);
 
           should(api.isDone()).be.eql(true);
+          done();
         });
     });
 
     _.forEachRight(errorCodes, function (errorCode) {
-      it('should fail for following code ' + errorCode, function () {
+      it('should fail for following code ' + errorCode, function (done) {
         var success = sinon.spy(),
           failure = sinon.spy(),
           responseBody = mocks.getResponseBodyForErrorCase(errorCode, 'Validate');
 
-        var tmpApi = api.get(uris.tokens);
-        if (errorCode / 500 >= 1.0) {
-          tmpApi.replyWithError(JSON.stringify(responseBody));
-        } else {
-          tmpApi.reply(errorCode, JSON.stringify(responseBody));
-        }
+        api.get(uris.tokens).reply(errorCode, JSON.stringify(responseBody));
 
         tokensApi
           .validate({
@@ -94,11 +92,14 @@ module.exports = function (settings) {
 
             should(failure.calledWith({
               data      : responseBody,
-              statusCode: errorCode
+              statusCode: errorCode,
+              headers   : {}
             })).be.eql(true);
 
             should(api.isDone()).be.eql(true);
-            require('nock').cleanAll();
+            nock.cleanAll();
+
+            done();
           });
       });
     });
