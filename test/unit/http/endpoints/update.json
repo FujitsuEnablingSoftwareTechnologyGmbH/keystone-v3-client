@@ -1,0 +1,21 @@
+{
+    "request" : {
+        "endpoint": {
+            "interface": "admin",
+            "name"     : "Updated admin interface"
+        }
+    },
+    "response": {
+        "endpoint": {
+            "id"        : "0ede75d9189e4d0095f7108bf404c70b",
+            "interface" : "admin",
+            "links"     : {
+                "self": "http://identity:35357/v3/endpoints/0ede75d9189e4d0095f7108bf404c70b"
+            },
+            "name"      : "Updated admin interface",
+            "region"    : "RegionHell",
+            "url"       : "http://666.666.66.6:6666/",
+            "service_id": "0636e82b2a99402387431c9f93b94fe7"
+        }
+    }
+}

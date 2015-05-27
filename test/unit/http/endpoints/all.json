@@ -1,0 +1,23 @@
+{
+    "response": {
+        "endpoints": [
+            {
+                "region_id" : "RegionOne",
+                "links"     : {
+                    "self": "http://192.168.10.5:5000/v3/endpoints/0ede75d9189e4d0095f7108bf404c70b"
+                },
+                "url"       : "http://192.168.10.5:8777/",
+                "region"    : "RegionOne",
+                "enabled"   : true,
+                "interface" : "internal",
+                "service_id": "0636e82b2a99402387431c9f93b94fe7",
+                "id"        : "0ede75d9189e4d0095f7108bf404c70b"
+            }
+        ],
+        "links"    : {
+            "self"    : "http://192.168.10.5:5000/v3/endpoints",
+            "previous": null,
+            "next"    : null
+        }
+    }
+}
