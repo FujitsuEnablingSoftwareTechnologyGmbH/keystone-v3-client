@@ -1,0 +1,74 @@
+{
+    "response": {
+        "links": {
+            "self"    : "http://192.168.10.5:5000/v3/roles",
+            "previous": null,
+            "next"    : null
+        },
+        "roles": [
+            {
+                "id"   : "21f2cbb3ccd74ec291bb23e6415476b6",
+                "links": {
+                    "self": "http://192.168.10.5:5000/v3/roles/21f2cbb3ccd74ec291bb23e6415476b6"
+                },
+                "name" : "heat_stack_user"
+            },
+            {
+                "id"   : "3ed6e60f303d4356997e02a338f8671e",
+                "links": {
+                    "self": "http://192.168.10.5:5000/v3/roles/3ed6e60f303d4356997e02a338f8671e"
+                },
+                "name" : "admin"
+            },
+            {
+                "id"   : "425359e99e004c57957c5da305e862b6",
+                "links": {
+                    "self": "http://192.168.10.5:5000/v3/roles/425359e99e004c57957c5da305e862b6"
+                },
+                "name" : "Member"
+            },
+            {
+                "id"   : "468e3166e0a6488fb04c7ce45864495c",
+                "links": {
+                    "self": "http://192.168.10.5:5000/v3/roles/468e3166e0a6488fb04c7ce45864495c"
+                },
+                "name" : "monasca-user"
+            },
+            {
+                "id"   : "93cdfbafb5314561a5f1a83aaa3e8edf",
+                "links": {
+                    "self": "http://192.168.10.5:5000/v3/roles/93cdfbafb5314561a5f1a83aaa3e8edf"
+                },
+                "name" : "monasca-agent"
+            },
+            {
+                "id"   : "9fe2ff9ee4384b1894a90878d3e92bab",
+                "links": {
+                    "self": "http://192.168.10.5:5000/v3/roles/9fe2ff9ee4384b1894a90878d3e92bab"
+                },
+                "name" : "_member_"
+            },
+            {
+                "id"   : "a4dc0c559e654dfaa9c3cc9c62d89734",
+                "links": {
+                    "self": "http://192.168.10.5:5000/v3/roles/a4dc0c559e654dfaa9c3cc9c62d89734"
+                },
+                "name" : "ResellerAdmin"
+            },
+            {
+                "id"   : "bf0aef3411fc49fdbe18dfa0c36a3bba",
+                "links": {
+                    "self": "http://192.168.10.5:5000/v3/roles/bf0aef3411fc49fdbe18dfa0c36a3bba"
+                },
+                "name" : "anotherrole"
+            },
+            {
+                "id"   : "c13602cc8a6e4ed78392de4abe5b053e",
+                "links": {
+                    "self": "http://192.168.10.5:5000/v3/roles/c13602cc8a6e4ed78392de4abe5b053e"
+                },
+                "name" : "service"
+            }
+        ]
+    }
+}

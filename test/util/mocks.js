@@ -1,6 +1,7 @@
 var proxyquire = require('proxyquire'),
   sinon = require('sinon'),
-  utils = require('../../lib/utils');
+  utils = require('../../lib/utils'),
+  fs = require('fs');
 
 module.exports = {
   mockedKeystoneApi          : function (name) {
@@ -39,5 +40,10 @@ module.exports = {
         title  : contextName + ' :: An error title'
       }
     };
+  },
+  loadRRFile                 : function (file) {
+    return JSON.parse(
+      fs.readFileSync(file).toString()
+    );
   }
 };

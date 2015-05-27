@@ -1,0 +1,43 @@
+{
+    "response": {
+        "role_assignments": [
+            {
+                "scope": {
+                    "project": {
+                        "id": "5644497a1a574408b6b376e6dde18be8"
+                    }
+                },
+                "role" : {
+                    "id": "3ed6e60f303d4356997e02a338f8671e"
+                },
+                "user" : {
+                    "id": "175d833402414b99b0555438d17c68aa"
+                },
+                "links": {
+                    "assignment": "http://192.168.10.5:5000/v3/projects/5644497a1a574408b6b376e6dde18be8/users/175d833402414b99b0555438d17c68aa/roles/3ed6e60f303d4356997e02a338f8671e"
+                }
+            },
+            {
+                "scope": {
+                    "project": {
+                        "id": "b4265b0a48ae4fd3bdcee0ad8c2b6012"
+                    }
+                },
+                "role" : {
+                    "id": "c13602cc8a6e4ed78392de4abe5b053e"
+                },
+                "user" : {
+                    "id": "2cf44ba664f74a39b168486039a71b9d"
+                },
+                "links": {
+                    "assignment": "http://192.168.10.5:5000/v3/projects/b4265b0a48ae4fd3bdcee0ad8c2b6012/users/2cf44ba664f74a39b168486039a71b9d/roles/c13602cc8a6e4ed78392de4abe5b053e"
+                }
+            }
+        ],
+        "links"           : {
+            "self"    : "http://192.168.10.5:5000/v3/role_assignments",
+            "previous": null,
+            "next"    : null
+        }
+    }
+}
