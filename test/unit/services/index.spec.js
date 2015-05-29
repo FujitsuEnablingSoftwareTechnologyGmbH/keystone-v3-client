@@ -11,7 +11,7 @@ describe('index:services', function () {
     index = require('../../../lib/services');
   });
 
-  it('should exports following services ' + services.toString(), function () {
+  it('should export following services ' + services.toString(), function () {
     should(index).have.keys(services);
   });
 
