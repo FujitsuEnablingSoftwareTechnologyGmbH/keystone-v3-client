@@ -9,7 +9,7 @@ describe('tokensCache::service', function () {
     var tokensCache;
 
     beforeEach(function () {
-      tokensCache = require('../../../lib/services/tokens.cache');
+      tokensCache = require('../../../lib/services/tokens-cache');
     });
 
     it('should be factory function before init', function () {
@@ -28,7 +28,7 @@ describe('tokensCache::service', function () {
       should(initialized.has).be.type('function');
       should(initialized.put).be.type('function');
 
-      afterInitTC = require('../../../lib/services/tokens.cache');
+      afterInitTC = require('../../../lib/services/tokens-cache');
       should(afterInitTC).be.type('function'); // should be function too
     });
   });
@@ -46,7 +46,7 @@ describe('tokensCache::service', function () {
       };
 
     beforeEach(function () {
-      tokensCache = proxyquire('../../../lib/services/tokens.cache', {
+      tokensCache = proxyquire('../../../lib/services/tokens-cache', {
         'memory-cache': memoryCache
       });
       tokensCache = tokensCache(opts);
@@ -88,7 +88,7 @@ describe('tokensCache::service', function () {
         put: sinon.spy(),
         get: sinon.spy()
       };
-      tokensCache = proxyquire('../../../lib/services/tokens.cache', {
+      tokensCache = proxyquire('../../../lib/services/tokens-cache', {
         'memory-cache': memoryCache
       })(opts);
 
@@ -106,7 +106,7 @@ describe('tokensCache::service', function () {
           put: sinon.spy(),
           get: sinon.stub().returns(expectedHasData ? {} : undefined)
         };
-        tokensCache = proxyquire('../../../lib/services/tokens.cache', {
+        tokensCache = proxyquire('../../../lib/services/tokens-cache', {
           'memory-cache': memoryCache
         })(opts);
 
@@ -128,7 +128,7 @@ describe('tokensCache::service', function () {
         put: sinon.spy(),
         get: sinon.stub().returns(data)
       };
-      tokensCache = proxyquire('../../../lib/services/tokens.cache', {
+      tokensCache = proxyquire('../../../lib/services/tokens-cache', {
         'memory-cache': memoryCache
       })(opts);
 

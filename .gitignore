@@ -16,3 +16,6 @@ coverage/
 # ignore IDEA files
 .idea
 *.iml
+
+# ignore jsdoc generated documentation
+docs/code/*

@@ -40,18 +40,20 @@
         "jshint"              : "2.7.x",
         "jshint-html-reporter": "0.2.x",
         "mocha"               : "2.2.x",
-        "istanbul"      : "0.3.x",
-        "mocha-istanbul": "0.2.0",
+        "istanbul"            : "0.3.x",
+        "mocha-istanbul"      : "0.2.0",
         "nock"                : "2.2.x",
         "proxyquire"          : "1.5.x",
         "should"              : "6.0.x",
-        "sinon"               : "1.14.x"
+        "sinon"               : "1.14.x",
+        "jsdoc"               : "3.3.x"
     },
     "licenses"       : [],
     "scripts"        : {
         "test"     : "./scripts/tests.sh",
         "lint"     : "./scripts/lint.sh",
         "lint:html": "./scripts/lint.html.sh",
-        "coverage" : "./scripts/coverage.sh"
+        "coverage" : "./scripts/coverage.sh",
+        "docs:code": "./scripts/documentation.sh"
     }
 }

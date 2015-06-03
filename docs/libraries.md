@@ -16,3 +16,4 @@
 * proxyquire > MIT
 * mocha > MIT
 * nock > MIT
+* jsdoc > Apache License V2.0

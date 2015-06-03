@@ -8,13 +8,19 @@ This information is useless for the client and binding should automatically unwr
 
 ## Optional parametric requests
 
-Some request are by definition parametric due to list of parameters contains
-only required ones. However request where parameters are optional are not implemented.
+Some request are by definition parametric because of parameters are directly embedded in URI.
+However requests where parameters are optional are not implemented.
 As a reference for this issue check following [hyperlink](http://developer.openstack.org/api-ref-identity-v3.html#listCredentials).
 
 ## Increase test coverage with mocked HTTP server
 
-For current release only tokens has been covered with such test, but all binding should be tested like that.
+Following API binding has not been tested with tests:
+* [domains](lib/keystone/domains.js)
+* [groups](lib/keystone/groups.js)
+* [policies](lib/keystone/policies.js)
+* [projects](lib/keystone/projects.js)
+* [service-catalog](lib/keystone/service-catalog.js)
+* [users](lib/keystone/users.js)
 
 ## Tokens-Service
 

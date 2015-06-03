@@ -216,7 +216,7 @@ describe('tokens:service', function () {
 
       function setUp() {
         // spy tokenCache
-        tokenCache = _.clone(require('../../../lib/services/tokens.cache')(settings));
+        tokenCache = _.clone(require('../../../lib/services/tokens-cache')(settings));
         sinon.stub(tokenCache);
 
         // stub getApi to always retrieve fresh version of tokensApi
@@ -227,7 +227,7 @@ describe('tokens:service', function () {
 
         TokenService = proxyquire('../../../lib/services/tokens', {
           '../util/services': servicesUtil,
-          './tokens.cache'  : _.constant(tokenCache) // spied tokenCache into TokenService
+          './tokens-cache'  : _.constant(tokenCache) // spied tokenCache into TokenService
         });
         tokenService = TokenService(settings);
       }
