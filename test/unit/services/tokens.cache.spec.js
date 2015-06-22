@@ -141,4 +141,54 @@ describe('tokensCache::service', function () {
     });
   });
 
+  context('expires_at [caching enabled]', function(){
+    var tokensCache,
+        memoryCache,
+        utilsSpied,
+        opts = {
+          tokensCache: {
+            ttl  : 5,
+            cache: true // this is default
+          }
+        };
+
+    beforeEach(function(){
+      var utils = require('../../../lib/utils');
+
+      utilsSpied = {
+        parseISO8601Date: sinon.spy(utils.parseISO8601Date),
+        dateDiff: sinon.spy(utils.dateDiff)
+      }
+
+    });
+
+    it('should use calculated ttl for expires_in', function (done) {
+      var token = '3122142142121',
+          isoDateToday = new Date().toISOString(),
+          data = {
+            'expires_at': isoDateToday
+          };
+
+      memoryCache = {
+        put: sinon.spy()
+      };
+      tokensCache = proxyquire('../../../lib/services/tokens-cache', {
+        'memory-cache': memoryCache,
+        '../utils'    : utilsSpied
+      })(opts);
+
+      setTimeout(function () {
+
+        tokensCache.put(token, data);
+
+        should(memoryCache.put.called).be.eql(true);
+        should(utilsSpied.parseISO8601Date.calledWith(isoDateToday)).be.eql(true);
+        should(utilsSpied.dateDiff.called).be.eql(true);
+
+        done();
+
+      }, 100);
+    })
+  });
+
 });

@@ -50,8 +50,9 @@ describe('tokens:service', function () {
         });
 
         it('should reject immediately if token has not been authenticated/validated', function (done) {
-          var getStub = tokenCache.get.returns(undefined),
-            errorSpied = sinon.spy();
+          var errorSpied = sinon.spy();
+
+          tokenCache.get.returns(undefined);
 
           tokenService
             .refreshToken(randomToken)
@@ -72,16 +73,15 @@ describe('tokens:service', function () {
                 ', either validate or authenticate it first');
             })
             .done(function () {
-              getStub.restore();
               done();
             });
 
         });
 
         it('should try to refresh token if token in cache', function (done) {
-          var tokenData = {},
-            getStub = tokenCache.get.returns(tokenData);
+          var tokenData = {};
 
+          tokenCache.get.returns(tokenData);
           authenticateStub.returns(Promise.reject());
 
           tokenService
@@ -90,7 +90,6 @@ describe('tokens:service', function () {
               should(authenticateStub.called).be.eql(true);
             })
             .done(function () {
-              getStub.restore();
               done();
             });
         });
@@ -110,7 +109,7 @@ describe('tokens:service', function () {
             };
 
           // setup stubs
-          getStub = tokenCache.get.returns(randomToken);
+          tokenCache.get.returns(randomToken);
           authenticateStub.returns(Promise.resolve(response));
 
           tokenService
@@ -128,7 +127,6 @@ describe('tokens:service', function () {
               should(tokenCache.put.calledWith(newToken, newTokenData, sinon.match.any)).be.eql(true);
             })
             .done(function () {
-              getStub.restore();
               done();
             });
 
@@ -136,7 +134,155 @@ describe('tokens:service', function () {
       }
 
       function validateToken() {
-        // in progress
+        var validateStub,
+            checkStub,
+            isTokenValidCB,
+            randomToken;
+
+        beforeEach(function () {
+          validateStub = sinon.stub(tokensApi, 'validate');
+          checkStub = sinon.stub(tokensApi, 'check');
+          randomToken = '32423423423423423';
+        });
+        afterEach(function () {
+          validateStub.restore();
+          checkStub.restore();
+        });
+
+        if (cacheEnabled) {
+          it('should return valid=false, token in cache but expired', function (done) {
+            isTokenValidCB = sinon.spy();
+            tokenCache.has.withArgs(tokens.subjectToken).returns(true); // in cache
+            checkStub.returns(Promise.resolve());                       // expired
+
+            tokenService
+                .validateToken(tokens.authToken, tokens.subjectToken)
+                .then(isTokenValidCB)
+                .finally(checkSpies)
+                .finally(checkTokenCache)
+                .done(done);
+
+            function checkSpies() {
+              should(isTokenValidCB.called).be.eql(true);
+              should(isTokenValidCB.calledWith({
+                token: tokens.subjectToken,
+                valid: false
+              })).be.eql(true);
+            }
+
+            function checkTokenCache() {
+              should(tokenCache.has.calledWith(tokens.subjectToken)).be.eql(true);
+            }
+
+          });
+
+          it('should return valid=true, token in cache and not expired', function (done) {
+            isTokenValidCB = sinon.spy();
+            tokenCache.has.withArgs(tokens.subjectToken).returns(true); // in cache
+            checkStub.returns(Promise.reject());                       // not expired
+
+            tokenService
+                .validateToken(tokens.authToken, tokens.subjectToken)
+                .then(isTokenValidCB)
+                .finally(checkSpies)
+                .finally(checkTokenCache)
+                .done(done);
+
+            function checkSpies() {
+              should(isTokenValidCB.called).be.eql(true);
+              should(isTokenValidCB.calledWith({
+                token: tokens.subjectToken,
+                valid: true
+              })).be.eql(true);
+            }
+
+            function checkTokenCache() {
+              should(tokenCache.has.calledWith(tokens.subjectToken)).be.eql(true);
+            }
+          });
+        } else {
+          it('should return valid=true, token not in cache and valid', function (done) {
+            isTokenValidCB = sinon.spy();
+            var tokenData = {
+              token: {
+                'expires_at': '2013-02-27T18:30:59.999999Z',
+                'issued_at' : '2013-02-27T16:30:59.999999Z',
+                'methods'   : [
+                  'password'
+                ],
+                'user'      : {
+                  'domain': {
+                    'id'   : '1789d1',
+                    'links': {
+                      'self': 'http://identity:35357/v3/domains/1789d1'
+                    },
+                    'name' : 'example.com'
+                  },
+                  'id'    : '0ca8f6',
+                  'links' : {
+                    'self': 'http://identity:35357/v3/users/0ca8f6'
+                  },
+                  'name'  : 'Joe'
+                }
+              }
+            };
+
+            tokenCache.has.withArgs(tokens.subjectToken).returns(false); // not in cache
+            validateStub.returns(Promise.resolve({
+              headers: {
+                'X-Subject-Token': tokens.subjectToken
+              },
+              data   : tokenData
+            }));
+
+            tokenService
+                .validateToken(tokens.authToken, tokens.subjectToken)
+                .then(isTokenValidCB)
+                .finally(checkSpies)
+                .finally(checkTokenCache)
+                .done(done);
+
+            function checkSpies() {
+              should(isTokenValidCB.called).be.eql(true);
+              should(isTokenValidCB.calledWith({
+                token: tokens.subjectToken,
+                valid: true
+              })).be.eql(true);
+            }
+
+            function checkTokenCache() {
+              should(tokenCache.has.calledWith(tokens.subjectToken)).be.eql(true);
+              should(tokenCache.put.calledWith(tokens.subjectToken, tokenData.token, sinon.match.any)).be.eql(true);
+            }
+          });
+
+          it('should return valid=true, token not in cache and not valid', function (done) {
+            isTokenValidCB = sinon.spy();
+
+            tokenCache.has.withArgs(tokens.subjectToken).returns(false); // not in cache
+            validateStub.returns(Promise.reject());
+
+            tokenService
+                .validateToken(tokens.authToken, tokens.subjectToken)
+                .then(isTokenValidCB)
+                .finally(checkSpies)
+                .finally(checkTokenCache)
+                .done(done);
+
+            function checkSpies() {
+              should(isTokenValidCB.called).be.eql(true);
+              should(isTokenValidCB.calledWith({
+                token: tokens.subjectToken,
+                valid: false
+              })).be.eql(true);
+            }
+
+            function checkTokenCache() {
+              should(tokenCache.has.calledWith(tokens.subjectToken)).be.eql(true);
+              should(tokenCache.put.calledWith(tokens.subjectToken, sinon.match.any, sinon.match.any)).be.eql(false);
+            }
+          });
+        }
       }
 
       function isTokenExpired() {
@@ -217,7 +363,7 @@ describe('tokens:service', function () {
       function setUp() {
         // spy tokenCache
         tokenCache = _.clone(require('../../../lib/services/tokens-cache')(settings));
-        sinon.stub(tokenCache);
+        tokenCache = sinon.stub(tokenCache);
 
         // stub getApi to always retrieve fresh version of tokensApi
         servicesUtil = require('../../../lib/util/services');
@@ -234,6 +380,10 @@ describe('tokens:service', function () {
 
       function tearDown() {
         servicesUtil.getApi.restore();
+        tokenCache.del.restore();
+        tokenCache.has.restore();
+        tokenCache.put.restore();
+        tokenCache.get.restore();
       }
     };
 
