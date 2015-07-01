@@ -34,7 +34,7 @@ established,
 - *cache* - if cache takes default value all caching functionality is being
 silently disabled immediately when initializing **tokens-cache**
 
-For default values and ttl algorithm go [here](lib/services/tokens-cache.js)
+For default values and ttl algorithm go [here](../lib/services/tokens-cache.js)
 
 ## :b: Services
 

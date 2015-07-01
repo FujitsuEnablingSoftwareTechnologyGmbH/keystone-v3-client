@@ -19,7 +19,7 @@ foundation for every future release.
 
 ## Configuration <a id="Configuration"></a>
 
-For general approach go [here](docs/configuration.md), any binding
+For general approach go [here](../configuration.md), any binding
 specific configuration, please refer to documentation of it.
 
 ## Usage <a id="Usage"></a>
@@ -61,7 +61,7 @@ reuse bindings.
 
 For better readability, examples have some code omitted such as <b>require</b>
 statements. For better understing all samples below are created with
-following API > [**TokensApi**](lib/keystone/tokens.js)
+following API > [**TokensApi**](../../lib/keystone/tokens.js)
 
 ### Creating API object
 

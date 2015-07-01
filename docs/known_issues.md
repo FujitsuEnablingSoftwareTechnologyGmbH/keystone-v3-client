@@ -15,12 +15,12 @@ As a reference for this issue check following [hyperlink](http://developer.opens
 ## Increase test coverage with mocked HTTP server
 
 Following API binding has not been tested with tests:
-* [domains](lib/keystone/domains.js)
-* [groups](lib/keystone/groups.js)
-* [policies](lib/keystone/policies.js)
-* [projects](lib/keystone/projects.js)
-* [service-catalog](lib/keystone/service-catalog.js)
-* [users](lib/keystone/users.js)
+* [domains](../lib/keystone/domains.js)
+* [groups](../lib/keystone/groups.js)
+* [policies](../lib/keystone/policies.js)
+* [projects](../lib/keystone/projects.js)
+* [service-catalog](../lib/keystone/service-catalog.js)
+* [users](../lib/keystone/users.js)
 
 ## Tokens-Service
 

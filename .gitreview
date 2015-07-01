@@ -1,5 +1,0 @@
-[gerrit]
-host=10.187.22.116
-port=29418
-project=keystone-v3-client.git
-defaultbranch=dev2

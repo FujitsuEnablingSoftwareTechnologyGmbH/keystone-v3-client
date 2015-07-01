@@ -5,7 +5,7 @@ Identity V3 API and NodeJS.
 
 # Table of contents
 
-* [Configuration options](docs/configuration.md)
-* [Using API binding](docs/api/readme.md)
-* [Libraries with licenses](docs/libraries.md)
-* [Known issues](docs/known_issues.md)
+* [Configuration options](configuration.md)
+* [Using API binding](api/readme.md)
+* [Libraries with licenses](libraries.md)
+* [Known issues](known_issues.md)
