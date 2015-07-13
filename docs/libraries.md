@@ -17,3 +17,7 @@
 * mocha > MIT
 * nock > MIT
 * jsdoc > Apache License V2.0
+
+# License
+
+Copyright 2015 FUJITSU LIMITED

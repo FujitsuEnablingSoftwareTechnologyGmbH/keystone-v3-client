@@ -9,3 +9,7 @@ Identity V3 API and NodeJS.
 * [Using API binding](api/readme.md)
 * [Libraries with licenses](libraries.md)
 * [Known issues](known_issues.md)
+
+# License
+
+Copyright 2015 FUJITSU LIMITED

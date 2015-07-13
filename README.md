@@ -42,3 +42,7 @@ Generated documentation provides readable format of an project's API.
 ```bash
 npm run docs:code
 ```
+
+# License
+
+Copyright 2015 FUJITSU LIMITED

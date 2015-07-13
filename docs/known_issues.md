@@ -1,4 +1,5 @@
 # Todos
+# Todos
 
 ## Unwrapping requests
 
@@ -26,3 +27,7 @@ Following API binding has not been tested with tests:
 
 Should automatically handle tokens refreshing and caching.
 Refreshing should be made only if token has expired.
+
+# License
+
+Copyright 2015 FUJITSU LIMITED

@@ -120,3 +120,7 @@ respectively:
 }
 ```
 * Error instance
+
+# License
+
+Copyright 2015 FUJITSU LIMITED

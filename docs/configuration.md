@@ -65,3 +65,7 @@ By that they share also settings and configuration options.
 ### url
 
 Same as common [url](common.url)
+
+# License
+
+Copyright 2015 FUJITSU LIMITED
