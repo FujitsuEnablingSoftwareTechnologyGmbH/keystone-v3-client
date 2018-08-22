@@ -12,8 +12,8 @@
  * the License.
  */
 
-var forEach = require('lodash/collection/forEachRight'),
-  keys = require('lodash/object/keys'),
+var forEach = require('lodash/forEachRight'),
+  keys = require('lodash/keys'),
   should = require('should');
 
 describe('index:services', function () {
