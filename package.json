@@ -2,7 +2,7 @@
     "name"           : "keystone-v3-client",
     "description"    : "A Node.js client for the OpenStack Keystone V3 Identity service",
     "private"        : true,
-    "version"        : "0.0.7",
+    "version"        : "0.0.8",
     "keywords"       : [
         "keystone",
         "identity",
@@ -27,8 +27,8 @@
         "keystone": "./lib/keystone"
     },
     "dependencies"   : {
-        "lodash"      : "3.9.x",
-        "debug"       : "2.2.x",
+        "lodash"      : "~4.17.5",
+        "debug"       : "~2.6.9",
         "bluebird"    : "2.9.x",
         "restler"     : "3.2.x",
         "memory-cache": "0.1.x"
