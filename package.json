@@ -1,7 +1,6 @@
 {
     "name"           : "keystone-v3-client",
     "description"    : "A Node.js client for the OpenStack Keystone V3 Identity service",
-    "private"        : true,
     "version"        : "0.0.8",
     "keywords"       : [
         "keystone",
